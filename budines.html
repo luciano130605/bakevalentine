@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bake Valentine - Budines</title>
+  <link rel="stylesheet" href="productos.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="titulo text-center my-4">Budines</h1>
+
+    <div class="row g-4">
+      <!-- Budín 1 -->
+      <div class="col-6 col-md-3">
+        <div class="producto text-center">
+          <img src="budinvainilla.jpeg" onclick="abrirImagen(this)">
+          <h3>Budín de vainilla</h3>
+          <button class="btn btn-success w-100 mt-2" onclick="seleccionarBudin('Budín de vainilla')">
+            <i class="fab fa-whatsapp"></i> Pedir
+          </button>
+        </div>
+      </div>
+
+      <!-- Budín 2 -->
+      <div class="col-6 col-md-3">
+        <div class="producto text-center">
+          <img src="budinvainillachips.jpeg" onclick="abrirImagen(this)">
+          <h3>Budín de vainilla con chips</h3>
+          <button class="btn btn-success w-100 mt-2" onclick="seleccionarBudin('Budín de vainilla con chips')">
+            <i class="fab fa-whatsapp"></i> Pedir
+          </button>
+        </div>
+      </div>
+
+      <!-- Budín 3 -->
+      <div class="col-6 col-md-3">
+        <div class="producto text-center">
+          <img src="budinchocolate.jpeg" onclick="abrirImagen(this)">
+          <h3>Budín de chocolate</h3>
+          <button class="btn btn-success w-100 mt-2" onclick="seleccionarBudin('Budín de chocolate')">
+            <i class="fab fa-whatsapp"></i> Pedir
+          </button>
+        </div>
+      </div>
+
+      <!-- Budín 4 -->
+      <div class="col-6 col-md-3">
+        <div class="producto text-center">
+          <img src="budinchocolatechips.jpeg" onclick="abrirImagen(this)">
+          <h3>Budín de chocolate con chips</h3>
+          <button class="btn btn-success w-100 mt-2" onclick="seleccionarBudin('Budín de chocolate con chips')">
+            <i class="fab fa-whatsapp"></i> Pedir
+          </button>
+        </div>
+      </div>
+
+      <!-- Budín 5 -->
+      <div class="col-6 col-md-3">
+        <div class="producto text-center">
+          <img src="budinmarmolado.jpeg" onclick="abrirImagen(this)">
+          <h3>Budín marmolado</h3>
+          <button class="btn btn-success w-100 mt-2" onclick="seleccionarBudin('Budín marmolado')">
+            <i class="fab fa-whatsapp"></i> Pedir
+          </button>
+        </div>
+      </div>
+
+      <!-- Budín 6 -->
+      <div class="col-6 col-md-3">
+        <div class="producto text-center">
+          <img src="budinlimon.jpeg" onclick="abrirImagen(this)">
+          <h3>Budín de limón con glase</h3>
+          <button class="btn btn-success w-100 mt-2" onclick="seleccionarBudin('Budín de limón con glase')">
+            <i class="fab fa-whatsapp"></i> Pedir
+          </button>
+        </div>
+      </div>
+
+      <!-- Budín 7 -->
+      <div class="col-6 col-md-3">
+        <div class="producto text-center">
+          <img src="budinnaranja.jpeg" onclick="abrirImagen(this)">
+          <h3>Budín de naranja con glase</h3>
+          <button class="btn btn-success w-100 mt-2" onclick="seleccionarBudin('Budín de naranja con glase')">
+            <i class="fab fa-whatsapp"></i> Pedir
+          </button>
+        </div>
+      </div>
+
+      <!-- Budín 8 -->
+      <div class="col-6 col-md-3">
+        <div class="producto text-center">
+          <img src="budinbanana.jpeg" onclick="abrirImagen(this)">
+          <h3>Budín de banana con chips</h3>
+          <button class="btn btn-success w-100 mt-2" onclick="seleccionarBudin('Budín de banana con chips')">
+            <i class="fab fa-whatsapp"></i> Pedir
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Budines -->
+  <div class="modal fade" id="modalBudin" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Seleccioná tamaño</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <label><input type="radio" name="tamañoBudin" value="Porción" checked> Porción: $1500</label><br>
+          <label><input type="radio" name="tamañoBudin" value="300g"> 300 gramos: $5000</label><br>
+          <label><input type="radio" name="tamañoBudin" value="500g"> 500 gramos: $8000</label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success w-100" onclick="pedirBudinWhatsApp()">Pedir por WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup imagen -->
+  <div id="popup" class="popup">
+    <span class="cerrar" onclick="cerrarPopup()">&times;</span>
+    <img class="popup-img" id="imagenAmpliada" src="">
+  </div>
+
+  <script>
+    let budinSeleccionado = '';
+
+    function abrirImagen(img) {
+      document.getElementById("popup").style.display = "block";
+      document.getElementById("imagenAmpliada").src = img.src;
+    }
+
+    function cerrarPopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    function seleccionarBudin(nombre) {
+      budinSeleccionado = nombre;
+      const modal = new bootstrap.Modal(document.getElementById('modalBudin'));
+      modal.show();
+    }
+
+    function pedirBudinWhatsApp() {
+      if (!budinSeleccionado) return alert("Seleccioná primero un tamaño de budín");
+      const tamaño = document.querySelector('input[name="tamañoBudin"]:checked')?.value || "Porción";
+      const mensaje = `Hola! Quiero pedir ${budinSeleccionado}, tamaño: ${tamaño}`;
+      const numero = "541131121121";
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('modo') === 'dark') {
+        document.body.classList.add('dark-mode');
+      }
+    });
+  </script>
+</body>
+
+</html>

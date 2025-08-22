@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake Valentine - Alfajores</title>
+    <link rel="stylesheet" href="productos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .producto {
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .producto img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+
+        .no-disponible .precio,
+        .no-disponible button {
+            display: none;
+        }
+
+        .no-disponible h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .cerrar {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="titulo text-center my-4">Alfajores</h1>
+        <div class="row g-4" id="productosContainer"></div>
+    </div>
+
+    <div id="popup" class="popup">
+        <span class="cerrar" onclick="cerrarPopup()">&times;</span>
+        <img class="popup-img" id="imagenAmpliada" src="">
+    </div>
+
+    <script>
+        const STORAGE_KEY = "alfajoresProductos"; // 🔑 DEFINIDO
+
+        // Productos por defecto
+        const productosDefault = [
+            { nombre: "Alfajor 1", img: "alfajor.jpeg", precio: "$0000", disponible: true },
+            { nombre: "Alfajor 2", img: "alfajor.jpeg", precio: "$0000", disponible: true },
+            { nombre: "Alfajor 3", img: "alfajor.jpeg", precio: "$0000", disponible: true },
+            { nombre: "Alfajor 4", img: "alfajor.jpeg", precio: "$0000", disponible: true },
+        ];
+
+        // Inicializar localStorage solo si no existe
+        if (!localStorage.getItem(STORAGE_KEY)) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(productosDefault));
+        }
+
+        // Leer productos desde localStorage
+        let productos = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+        function abrirImagen(img) {
+            document.getElementById("popup").style.display = "flex";
+            document.getElementById("imagenAmpliada").src = img.src;
+        }
+
+        function cerrarPopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function mostrarProductos() {
+            const container = document.getElementById("productosContainer");
+            container.innerHTML = "";
+
+            productos.forEach(producto => {
+                const div = document.createElement("div");
+                div.classList.add("col-12", "col-sm-6", "col-md-3");
+                div.innerHTML = `
+            <div class="producto text-center ${!producto.disponible ? "no-disponible" : ""}">
+                <img src="${producto.img}" onclick="abrirImagen(this)">
+                ${!producto.disponible ? `<div class="overlay">Próximamente</div>` : ""}
+                <h3>${producto.nombre}</h3>
+                ${producto.disponible
+                        ? `<p class="precio">${producto.precio}</p>
+                       <button class="btn btn-success w-100 mt-2" onclick="pedirWhatsApp('${producto.nombre}')">
+                          <i class="fab fa-whatsapp"></i> Pedir
+                       </button>`
+                        : `<p class="precio">Próximamente</p>`}
+            </div>
+        `;
+                container.appendChild(div);
+            });
+        }
+
+        function pedirWhatsApp(nombre) {
+            const mensaje = `Hola! Quiero pedir ${nombre}`;
+            const numero = "541131121121";
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, "_blank");
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            mostrarProductos();
+            if (localStorage.getItem('modo') === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        })
+
+        document.addEventListener('DOMContentLoaded', () => {
+            mostrarProductos();
+        });
+    </script>
+</body>
+
+</html>

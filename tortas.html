@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bake Valentine - Tortas y Tartas</title>
+  <link rel="stylesheet" href="productos.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="titulo text-center my-4">Tortas y Tartas</h1>
+
+    <div class="row g-4">
+      <!-- Generación de productos dinámica -->
+      <div id="productosContainer" class="row g-4"></div>
+    </div>
+  </div>
+
+  <!-- Modal único de precios -->
+  <div class="modal fade" id="modalTorta" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="font-family:'Loubag', serif; color:#3877AA; font-weight:600; font-size:1.5rem; text-align:center; width:100%;">Seleccioná tamaño</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center" id="preciosTorta"></div>
+        <div class="modal-footer">
+          <button class="btn btn-success w-100" onclick="pedirTortaWhatsApp()">Pedir por WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup imagen -->
+  <div id="popup" class="popup">
+    <span class="cerrar" onclick="cerrarPopup()">&times;</span>
+    <img class="popup-img" id="imagenAmpliada" src="">
+  </div>
+
+  <script>
+    const tortas = [
+      {
+        nombre: "Pastafrola de membrillo",
+        img: "tortapastafrolamembrillo.jpeg",
+        precios: [
+          { nombre: "Porción 7x7", precio: 2500 },
+          { nombre: "Chica 12cm", precio: 6500 },
+          { nombre: "Mediana 18cm", precio: 12000 },
+          { nombre: "Grande 26cm", precio: 18000 }
+        ]
+      },
+      {
+        nombre: "Pastafrola de batata",
+        img: "tortapastafrolabatata.jpeg",
+        precios: [
+          { nombre: "Porción 7x7", precio: 2500 },
+          { nombre: "Chica 12cm", precio: 6500 },
+          { nombre: "Mediana 18cm", precio: 12000 },
+          { nombre: "Grande 26cm", precio: 18000 }
+        ]
+      },
+      {
+        nombre: "Pastafrola de dulce de leche",
+        img: "tortapastafroladdl.jpeg",
+        precios: [
+          { nombre: "Porción 7x7", precio: 3000 },
+          { nombre: "Chica 12cm", precio: 7000 },
+          { nombre: "Mediana 18cm", precio: 14000 },
+          { nombre: "Grande 26cm", precio: 20000 }
+        ]
+      },
+      {
+        nombre: "Tarta de coco y dulce de leche",
+        img: "tortacoco.jpeg",
+        precios: [
+          { nombre: "Individual 10cm", precio: 6000 },
+          { nombre: "Chica 12cm", precio: 8500 },
+          { nombre: "Mediana 18cm", precio: 16500 },
+          { nombre: "Grande 26cm", precio: 25000 }
+        ]
+      },
+      {
+        nombre: "Tarta de ricota",
+        img: "tortaricota.jpeg",
+        precios: [
+          { nombre: "Individual 10cm", precio: 4500 },
+          { nombre: "Chica 12cm", precio: 7000 },
+          { nombre: "Mediana 18cm", precio: 14000 },
+          { nombre: "Grande 26cm", precio: 20000 }
+        ]
+      },
+      {
+        nombre: "Tarta de ricota con dulce de leche",
+        img: "tortaricotaddl.jpeg",
+        precios: [
+          { nombre: "Individual 10cm", precio: 6000 },
+          { nombre: "Chica 12cm", precio: 8500 },
+          { nombre: "Mediana 18cm", precio: 16500 },
+          { nombre: "Grande 26cm", precio: 25000 }
+        ]
+      },
+      {
+        nombre: "Lemon pie",
+        img: "lemonpie.jpeg",
+        precios: [
+          { nombre: "Individual 10cm", precio: 7000 },
+          { nombre: "Chica 12cm", precio: 10000 },
+          { nombre: "Mediana 18cm", precio: 17000 },
+          { nombre: "Grande 26cm", precio: 26000 }
+        ]
+      },
+      {
+        nombre: "Chocotorta",
+        img: "chocotorta.jpeg",
+        precios: [
+          { nombre: "Individual 10cm", precio: 7000 },
+          { nombre: "Mediana 18cm", precio: 17000 },
+          { nombre: "Mediana 20cm", precio: 22000 },
+          { nombre: "Grande 26cm", precio: 26000 }
+        ]
+      },
+      {
+        nombre: "Brownie, dulce de leche y merengue",
+        img: "brownieddl.jpeg",
+        precios: [
+          { nombre: "Porción individual", precio: 1500 } // ejemplo simple
+        ]
+      }
+    ];
+
+    let tortaSeleccionada = '';
+
+    function abrirImagen(img) {
+      document.getElementById("popup").style.display = "block";
+      document.getElementById("imagenAmpliada").src = img.src;
+    }
+
+    function cerrarPopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    function mostrarTortas() {
+      const container = document.getElementById("productosContainer");
+      tortas.forEach(torta => {
+        const div = document.createElement("div");
+        div.classList.add("col-6", "col-md-3");
+        div.innerHTML = `
+          <div class="producto text-center">
+            <img src="${torta.img}" onclick="abrirImagen(this)">
+            <h3>${torta.nombre}</h3>
+            <button class="btn btn-success w-100 mt-2" onclick="seleccionarTorta('${torta.nombre}')">
+              <i class="fab fa-whatsapp"></i> Pedir
+            </button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function seleccionarTorta(nombre) {
+      tortaSeleccionada = nombre;
+      const modalBody = document.getElementById('preciosTorta');
+      modalBody.innerHTML = '';
+
+      const torta = tortas.find(t => t.nombre === nombre);
+      torta.precios.forEach((item, i) => {
+        const checked = i === 0 ? 'checked' : '';
+        modalBody.innerHTML += `<label><input type="radio" name="tamañoTorta" value="${item.nombre}" ${checked}> ${item.nombre}: $${item.precio}</label><br>`;
+      });
+
+      const modal = new bootstrap.Modal(document.getElementById('modalTorta'));
+      modal.show();
+    }
+
+    function pedirTortaWhatsApp() {
+      if (!tortaSeleccionada) return alert("Seleccioná primero un tamaño");
+      const tamaño = document.querySelector('input[name="tamañoTorta"]:checked')?.value || "";
+      const mensaje = `Hola! Quiero pedir ${tortaSeleccionada}, tamaño: ${tamaño}`;
+      const numero = "541131121121";
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      mostrarTortas();
+      if (localStorage.getItem('modo') === 'dark') {
+        document.body.classList.add('dark-mode');
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- index -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake Valentine</title>
+    <link rel="stylesheet" href="portada.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- modo claro u oscuro -->
+    <button id="modoBtn" style="
+        position: fixed;
+        background: transparent;
+        color: #3877AA;
+        border: 2px solid #3877AA;
+        padding: 10px;
+        border-radius: 50%;
+        font-size: 1.4rem;
+        cursor: pointer;
+        top: 10px;
+        left: 19px;
+        z-index: 10000;
+        transition: all 0.3s ease;
+    ">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Botón cerrar iframe -->
+    <div id="cerrarIframe">✖</div>
+
+    <!-- Fondo animado -->
+    <div class="fondo"></div>
+    <div
+        style="display: none; position: absolute; top: 0; left:0; width: 100%; height: 100%; opacity: 0.3; background-color: bla;">
+
+    </div>
+
+    <!-- Portada -->
+    <header class="header">
+        <img src="logo.svg" alt="Logo Pastelería" class="logo" height="250">
+    </header>
+
+    <section class="portada">
+        <div class="fila">
+            <a href="tortas.html" class="btn-card">Tortas y tartas</a>
+            <a href="cookies.html" class="btn-card">Cookies</a>
+            <a href="alfajor.html" class="btn-card">Alfajores</a>
+            <a href="pepas.html" class="btn-card">Pepas y Scones</a>
+            <a href="budines.html" class="btn-card">Budines</a>
+            <a href="mufins.html" class="btn-card">Muffins y Cupcakes</a>
+            <a href="postres.html" class="btn-card">Postres</a>
+            <a href="box.html" class="btn-card">Box</a>
+        </div>
+    </section>
+
+    <!-- Contenedor del iframe -->
+    <div id="iframeContainer" style="
+        display:none;
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+        width: 100%;
+        max-width: 900px;
+        height: 90%;
+        background: #dbdce8;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        z-index: 9999;
+        padding: 20px;
+        font-family: 'ttmilks', serif;
+        color: F0F0E5;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    ">
+        <iframe id="iframeContenido" src=""
+            style="border-radius: 15px; border: none; height: 100%; width: 100%;"></iframe>
+    </div>
+
+    <script>
+        const container = document.getElementById("iframeContainer");
+        const iframe = document.getElementById("iframeContenido");
+        const cerrar = document.getElementById("cerrarIframe");
+        const modoBtn = document.getElementById('modoBtn');
+        const body = document.body;
+        const icon = modoBtn.querySelector('i');
+
+        // Aplicar preferencia de modo oscuro al cargar
+        if (localStorage.getItem('modo') === 'dark') {
+            body.classList.add('dark-mode');
+            container.style.background = '#1e1e1e';
+            icon.className = "fas fa-sun";
+        }
+
+        // Alternar modo oscuro
+        modoBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('modo', 'dark');
+                icon.className = "fas fa-sun";
+                container.style.background = '#1e1e1e';
+            } else {
+                localStorage.setItem('modo', 'light');
+                icon.className = "fas fa-moon";
+                container.style.background = '#dbdce8';
+            }
+
+            // animación del botón
+            modoBtn.style.transform = 'scale(1.1) rotate(15deg)';
+            setTimeout(() => { modoBtn.style.transform = 'scale(1) rotate(0deg)'; }, 300);
+
+            // aplicar modo oscuro dentro del iframe
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+            if (doc) {
+                if (body.classList.contains('dark-mode')) doc.body.classList.add('dark-mode');
+                else doc.body.classList.remove('dark-mode');
+            }
+        });
+
+        // Abrir iframe al click en tarjeta
+        document.querySelectorAll(".btn-card").forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const url = link.getAttribute("href");
+                iframe.src = url;
+                cerrar.style.display = "block";
+                container.style.display = "block";
+
+                container.getBoundingClientRect();
+                container.style.opacity = "1";
+                container.style.transform = "translateX(-50%) scale(1)";
+            });
+        });
+
+        // Aplicar modo oscuro al iframe al cargar
+        iframe.addEventListener('load', () => {
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+            if (body.classList.contains('dark-mode') && doc) {
+                doc.body.classList.add('dark-mode');
+            } else if (doc) {
+                doc.body.classList.remove('dark-mode');
+            }
+        });
+
+        // Cerrar iframe
+        cerrar.addEventListener("click", () => {
+            container.style.opacity = "0";
+            container.style.transform = "translateX(-50%) scale(0.8)";
+            setTimeout(() => {
+                container.style.display = "none";
+                iframe.src = "";
+                cerrar.style.display = "none";
+            }, 300);
+        });
+    </script>
+
+    <!-- Contactos -->
+    <footer class="contacto">
+        <h2>Contáctanos</h2>
+        <p><a href="https://www.google.com/maps/search/?api=1&query=Boedo,CABA" target="_blank"
+                style="text-decoration:none; color:#3877AA; font-weight:bold;">
+                <i class="fas fa-map-marker-alt"></i> ¡Encontranos en Boedo, CABA!
+            </a></p>
+        <p><i class="fas fa-phone"></i> Teléfono: +54 11 3112-1121</p>
+        <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/541131121121"
+                target="_blank">Comunicarse</a></p>
+        <p><i class="fas fa-envelope"></i> Mail: <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=bakevalentine.contacto@gmail.com"
+                target="_blank">bakevalentine.contacto@gmail.com</a></p>
+        <p><i class="fab fa-instagram"></i> Instagram: <a href="https://instagram.com/bakevalentine"
+                target="_blank">@bakevalentine</a></p>
+    </footer>
+</body>
+
+</html>

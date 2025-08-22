@@ -1,0 +1,389 @@
+/* Paleta de colores dulce */
+:root {
+    --Celeste: #3976ac;
+    --crema: #fff3e0;
+    --chocolate: #6b4c3b;
+    --Rosa: #ff80d9;
+
+    --fondo-claro: #F0F0E5;
+    --fondo-oscuro: #1a1a1a;
+    --texto-claro: #333;
+    --texto-oscuro: #f0f0f0;
+    --tarjeta-clara: rgba(255, 255, 255, 0.15);
+    --tarjeta-oscura: rgba(50, 50, 50, 0.5);
+    --btn-claro: #25D366;
+    --btn-oscuro: #1eb85b;
+}
+
+/* Body */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    overflow-x: hidden;
+    color: var(--texto-claro);
+    font-size: 12px;
+}
+
+/* Fondo animado con degradé + patrón + textura */
+.fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #F0F0E5;
+}
+
+/* Animación del degradé */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%, 0 0;
+    }
+
+    25% {
+        background-position: 100% 50%, 0 0;
+    }
+
+    50% {
+        background-position: 0% 50%, 0 0;
+    }
+
+    75% {
+        background-position: 100% 50%, 0 0;
+    }
+
+    100% {
+        background-position: 0% 50%, 0 0;
+    }
+}
+
+@font-face {
+    font-family: 'ttmilks';
+    src: url('ttmilks.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Header */
+.header {
+    height: 140px;
+}
+
+.logo {
+    width: 50rem;
+    position: relative;
+    top: -39px;
+}
+
+.titulo {
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+    color: #ff1493;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.7);
+    margin: 10px 0;
+}
+
+.slogan {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Portada: botones tipo tarjeta */
+.portada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.fila {
+    display: grid;
+    justify-content: center;
+    gap: 15px;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+    grid-template-rows: repeat(2, auto);
+}
+
+.btn {
+    background: #8BA5B7;
+    color: black;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    min-width: 150px;
+    text-align: center;
+}
+
+.btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.btn-card {
+    font-family: 'ttmilks', serif;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 180px;
+    border-radius: 25px;
+    background: var(--tarjeta-clara);
+    backdrop-filter: blur(10px);
+    color: #201100;
+    font-weight: bold;
+    font-size: 1.7rem;
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.modalTitle {
+    color: #3877AA;
+}
+
+.btn-card:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.35);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Footer contacto */
+footer.contacto {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    margin-top: 30px;
+    background-color: #b0b0b0;
+    text-align: center;
+    border-top: 3px solid rgb(206, 206, 206);
+    border-radius: 15px 15px 0 0;
+}
+
+footer.contacto h2 {
+    font-family: 'ttmilks', serif;
+    font-size: 1.9rem;
+    color: #3877AA;
+    margin-bottom: 15px;
+}
+
+footer.contacto p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+}
+
+footer.contacto a {
+    color: #3877AA;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer.contacto a:hover {
+    text-decoration: underline;
+}
+
+footer.contacto i {
+    color: #3877AA;
+    margin-right: 8px;
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.5);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* --- MODO OSCURO --- */
+body.dark-mode {
+    background-color: var(--fondo-oscuro);
+    color: var(--texto-oscuro);
+}
+
+body.dark-mode .fondo {
+    background-color: var(--fondo-oscuro);
+}
+
+body.dark-mode .btn-card {
+    background: var(--tarjeta-oscura);
+    color: #fee5c8;
+}
+
+body.dark-mode footer.contacto {
+    background-color: #333;
+    color: var(--texto-oscuro);
+}
+
+body.dark-mode footer.contacto a {
+    color: var(--texto-oscuro);
+}
+
+body.dark-mode #iframeContainer {
+    background-color: #2a2a2a;
+    color: var(--texto-oscuro);
+}
+
+/* Botón modo */
+#modoBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    color: #3877AA;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+#modoBtn:hover {
+    transform: scale(1.1) rotate(-20deg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#modoBtn:active {
+    transform: scale(1.05) rotate(10deg);
+}
+
+
+#cerrarIframe {
+    position: absolute;
+    top: 50px;
+    left: 325px;
+    background: #3877AA;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+    z-index: 10000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Responsivo móvil */
+/* Ajustes solo para móviles */
+@media (max-width: 600px) {
+
+    .portada {
+        height: 50vh;
+    }
+    /* Logo más pequeño y centrado */
+    .logo {
+        width: 70%;
+        max-width: 200px;
+        top: -40px;
+        /* lo sube un poco */
+        position: relative;
+    }
+
+    /* Título más chico */
+    .titulo {
+        font-size: 2rem;
+        margin: 10px 0 5px 0;
+    }
+
+    /* Slogan más chico */
+    .slogan {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    /* Portada: 2 filas x 3 columnas de botones */
+    .portada {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .fila {
+        flex-wrap: wrap;
+        /* permite que las cajas se ajusten */
+        justify-content: center;
+    }
+
+    .btn-card {
+        width: 106%;
+        max-width: 150px;
+        height: 130px;
+        font-size: 1rem;
+        margin: 5px;
+        letter-spacing: 1px
+    }
+
+
+    /* Botón modo oscuro accesible en móvil */
+    #modoBtn {
+        top: 40px;
+        width: 32px;
+        height: 35px;
+        font-size: 1rem;
+        right: 13px;
+    }
+
+    #cerrarIframe {
+        position: absolute;
+        top: 35px;
+        left: 30px;
+        background: #3877AA;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 70%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: none;
+        z-index: 10000;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Footer más compacto */
+    footer.contacto {
+        padding: 10px 5px;
+        font-size: 0.85rem;
+
+    }
+
+    footer.contacto h2 {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+
+    footer.contacto p {
+        margin: 3px 0;
+        font-size: 0.8rem;
+    }
+
+    footer.contacto a {
+        font-size: 0.8rem;
+    }
+}

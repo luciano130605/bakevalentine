@@ -1,0 +1,519 @@
+/* Fuentes personalizadas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+    --color-titulo: #3877AA;
+    /* valor default */
+}
+
+/* Fuente tt milks*/
+@font-face {
+    font-family: 'ttmilks';
+    /* Nombre que usaremos en CSS */
+    src: url('ttmilks.otf') format('opentype');
+    /* Archivo de fuente */
+    font-weight: normal;
+    /* Peso normal */
+    font-style: normal;
+    /* Estilo normal */
+}
+
+/* Fuente loubag*/
+@font-face {
+    font-family: 'Loubag';
+    src: url('Loubag.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Título principal */
+.titulo {
+    font-family: 'Loubag', serif;
+    /* Fuente del título */
+    color: #3877AA;
+    /* Color del texto */
+    font-size: 3rem;
+    /* Tamaño grande */
+    display: block;
+    /* Se comporta como bloque */
+    text-align: center;
+    /* Centra el título horizontalmente */
+    margin: 2rem 0;
+    /* Margen arriba y abajo */
+}
+
+/* Contenedor de cada producto */
+.producto {
+    font-family: 'ttmilks', serif;
+    /* Fuente del contenido de la tarjeta */
+    color: black;
+    /* Color del texto */
+    font-size: 1rem;
+    margin-top: 10px;
+    min-height: 200px;
+    /* Tamaño base del texto */
+    padding: 20px;
+    /* Espacio interno de la tarjeta */
+    letter-spacing: 2px;
+    /* Espacio entre letras */
+    text-align: center;
+    /* Centra todos los elementos del producto */
+    max-width: 200px;
+    width: 165px;
+    /* Ancho máximo de la tarjeta */
+    border: 1px solid #eee;
+    /* Borde sutil */
+    border-radius: 15px;
+    /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra ligera */
+    overflow: hidden;
+    /* Evita que el contenido sobresalga de la tarjeta */
+}
+
+/* Contenedor del botón WhatsApp */
+.btn-container {
+    display: flex;
+    /* Uso de flexbox para el botón */
+    justify-content: center;
+    /* Centra horizontalmente */
+    margin-top: 10px;
+    /* Espacio arriba del botón */
+}
+
+/* Botón de WhatsApp */
+.btn-whatsapp {
+    background-color: #25D366;
+    /* Color verde típico de WhatsApp */
+    color: white;
+    /* Texto en blanco */
+    font-family: 'Loubag', serif;
+    /* Fuente del botón */
+    font-size: 0.7rem;
+    /* Tamaño de letra pequeño */
+    padding: 6px 14px;
+    /* Espacio interno del botón */
+    border: none;
+    /* Sin borde */
+    border-radius: 12px;
+    /* Bordes redondeados tipo “pill” */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el botón */
+    display: inline-flex;
+    /* Flex para alinear icono y texto */
+    align-items: center;
+    /* Centra verticalmente el contenido del botón */
+    gap: 7px;
+    /* Espacio entre icono y texto */
+    transition: 0.3s ease;
+    /* Animación suave para hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    /* Sombra ligera */
+}
+
+/* Hover del botón WhatsApp */
+.btn-whatsapp:hover {
+    background-color: #1ebe5b;
+    /* Verde más oscuro al pasar el mouse */
+    transform: scale(1.05);
+    /* Efecto de agrandar ligeramente */
+}
+
+
+/*  sin relleno */
+.col-md-6 {
+    font-family: 'Loubag', serif;
+    color: #8abee9;
+    /* Fuente del título */
+    font-size: 0.5rem;
+}
+
+
+/* Imagen del producto */
+.producto img {
+    width: 100%;
+    /* Ocupa todo el ancho del contenedor */
+    max-width: 210px;
+    /* Ancho máximo */
+    max-height: 180px;
+    /* Altura máxima */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    /* Cursor al pasar sobre la imagen */
+    transition: transform 0.2s ease;
+    /* Transición suave para el efecto hover */
+    object-fit: cover;
+    /* Ajusta la imagen para cubrir sin deformar */
+    background-color: dbdce8;
+    /* Fondo detrás de la imagen */
+}
+
+/* Hover de la imagen */
+.producto img:hover {
+    transform: scale(1.05);
+    /* Agranda un poco la imagen */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    /* Sombra más marcada */
+    filter: drop-shadow(1px 1px 20px white);
+    /* Sombra blanca difusa */
+}
+
+
+
+/* Popup (imagen ampliada) */
+.popup {
+    display: none;
+    position: relative;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+/* Imagen dentro del popup */
+.popup-img {
+    display: block;
+    max-width: 90%;
+    max-height: 80%;
+    margin: 5% auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    /* Fondo claro para resaltar la imagen */
+    position: relative;
+    z-index: 1;
+    /* Para que la cruz quede arriba */
+}
+
+/* Botón de cerrar popup */
+.cerrar {
+    position: absolute;
+    /* Fija siempre arriba de la pantalla */
+    top: 10px;
+    /* margen superior */
+    right: 10px;
+    /* margen derecho */
+    color: #000;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+    /* más alto que la imagen */
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+}
+
+.cerrar:hover {
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    border-radius: 20px;
+    background-color: transparent;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+    /* donde dice precios - budin*/
+    background: #dfdfeb;
+    border-bottom: none !important;
+    border-radius: 20px 20px 0 0;
+    font-family: 'Loubag', serif;
+    text-align: center;
+    /* centra el contenido */
+    justify-content: center;
+    /* centra el título horizontalmente */
+}
+
+
+.modal-tittle {
+    /* titulo*/
+    font-family: 'Loubag', serif;
+    color: #3877AA;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.modal-body ul {
+    /* porcion, etc*/
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: rgb(0, 0, 0);
+}
+
+.modal-body li {
+    font-size: 1.1rem;
+    padding: 8px 0;
+    border-bottom: 1px dashed #ccc;
+}
+
+.modal-body li strong {
+    color: #000000;
+}
+
+
+/* Modo oscuro */
+.dark-mode .modal-body ul li {
+    background: #1e1e1e;
+    color: #f0f0f0;
+}
+
+
+/* MODO OSCURO */
+body.dark-mode {
+    background-color: #1e1e1e;
+    /* Fondo general oscuro */
+    color: #f0f0f0;
+    /* Texto principal claro */
+}
+
+/* Título en modo oscuro */
+
+/* Tarjeta de producto en modo oscuro */
+body.dark-mode .producto {
+    margin-top: 10px;
+    background-color: #2c2c2c;
+    /* Fondo de la tarjeta oscuro */
+    color: #ffffff;
+    /* Texto claro */
+    border: 1px solid #444;
+    /* Borde más visible sobre oscuro */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Sombra más marcada */
+}
+
+/* Botón WhatsApp en modo oscuro */
+body.dark-mode .btn-whatsapp {
+    background-color: #128c7e;
+    /* Verde más apagado para el modo oscuro */
+    color: #fff;
+    /* Texto blanco */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Sombra más fuerte */
+}
+
+body.dark-mode .btn-whatsapp:hover {
+    background-color: #075e54;
+    /* Verde aún más oscuro al pasar */
+}
+
+/* Imagen de producto en modo oscuro */
+body.dark-mode .producto img {
+    background-color: #2c2c2c;
+    /* Fondo detrás de la imagen más oscuro */
+}
+
+/* Modo oscuro sigue funcionando */
+body.dark-mode .popup {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+body.dark-mode .cerrar {
+    color: #fff;
+}
+
+body.dark-mode .cerrar:hover {
+    color: #ffdd57;
+}
+
+
+body.dark-mode .modal-content {
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode .modal-header {
+    /* donde dice precios - budin*/
+    background: #2f2f30;
+    border-bottom: none !important;
+    border-radius: 20px 20px 0 0;
+    font-family: 'Loubag', serif;
+    text-align: center;
+    /* centra el contenido */
+    justify-content: center;
+    /* centra el título horizontalmente */
+}
+
+body.dark-mode .modal-tittle {
+    /* titulo*/
+    font-family: 'Loubag', serif;
+    color: #3877AA;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+body.dark-mode .modal-body ul {
+    /* porcion, etc*/
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: rgb(255, 255, 255);
+}
+
+body.dark-mode .modal-body {
+    /* fondo*/
+    background: #2f2f30;
+}
+
+
+body.dark-mode .modal-body li {
+    background: #2f2f30;
+}
+
+body.dark-mode .modal-body li strong {
+    color: #ffffff;
+}
+/* Overlay Próximamente - fondo negro sólido */
+.producto .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    letter-spacing: 2px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: black;
+    border-radius: 15px;
+    background-color:white; /* negro sólido */
+    z-index: 10;
+}
+
+body.dark-mode .producto .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    letter-spacing: 2px;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #F0F0E5;
+    border-radius: 15px;
+    background-color: #2f2f30; /* negro sólido */
+    z-index: 10;
+}
+
+/* Modo oscuro - overlay igual */
+body.dark-mode .producto .overlay {
+    background-color: #2f2f30;
+    color: #F0F0E5;
+}
+
+#contadorPopup {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+}
+
+#contadorPopupContent {
+    background-color: #F0F0E5;
+    color: #2f2f30;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 300px;
+    width: 90%;
+    position: relative;
+}
+
+body.dark-mode #contadorPopupContent {
+    background-color: #2f2f30;
+    color: #F0F0E5;
+}
+
+
+
+@media (max-width: 600px) {
+    #modoBtn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+        top: 10px;
+        right: 10px;
+    }
+
+    .producto {
+        margin: 15px auto;
+        padding: 15px;
+    }
+
+    /* Ajuste del título principal */
+    .titulo {
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Ajuste de productos: 3 por fila */
+    .row.g-3>.col-6 {
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
+    }
+
+    /* Reducir tamaño de la tarjeta */
+    .producto {
+        max-width: 160px;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Reducir tamaño de imagen */
+    .producto img {
+        max-width: 120px;
+        max-height: 120px;
+    }
+
+    /* Ajuste de botones */
+    .btn.btn-success {
+        font-size: 1rem;
+        padding: 4px 8px;
+    }
+
+    .popup-img {
+        margin: 8% auto;
+    }
+
+    .btn-container {
+        margin-top: 15px;
+    }
+
+    .popup {
+        left: 120px;
+    }
+
+    .cerrar {
+        font-size: 2rem;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        top: 10px;
+        right: 10px;
+    }
+}
